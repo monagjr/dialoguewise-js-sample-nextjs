@@ -1,6 +1,11 @@
 import Head from 'next/head'
+import {DialogueWiseService} from 'dialoguewise'
 
-export default function Home() {
+export default function Home({ heroContent }) {
+  const divProps = {}
+  if (heroContent)
+    divProps.dangerouslySetInnerHTML = {__html : heroContent}
+    
   return (
     <div className="container">
       <Head>
@@ -13,6 +18,9 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
+        
+        <div {...divProps} />
+        
         <p className="description">
           Get started by editing <code>pages/index.js</code>
         </p>
@@ -206,4 +214,22 @@ export default function Home() {
       `}</style>
     </div>
   )
+}
+
+
+export async function getStaticProps() {
+  let request = {
+    slug: 'hero-section',
+    apiKey: 'b1266377591c4f2a9494c3abdd2cac5381D6Z825D26CEBAE8B6rn',
+    emailHash: '/kgmM46s1xC56BOFWRZp4j+0bdU19URpXdNT9liAX50=',
+  };
+
+  let dialogueWiseService = new DialogueWiseService();
+  let res = await dialogueWiseService.getDialogue(request);
+  const heroContent = res['dialogue'][0]['hero-content'];
+  return {
+    props: {
+      heroContent
+    }
+  }
 }
