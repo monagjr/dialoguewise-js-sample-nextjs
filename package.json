@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "dialoguewise": "file:./dialoguewise-0.0.4.tgz",
+    "dialoguewise": "file:./dialoguewise-0.0.8.tgz",
     "next": "9.4.4",
     "next-transpile-modules": "^3.3.0",
     "react": "16.13.1",
